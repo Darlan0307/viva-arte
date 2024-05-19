@@ -1,17 +1,16 @@
 import { Router } from "express";
+import { UserController } from "./controllers/UserController.js";
+
+const usercontroller = new UserController();
 
 const routes = Router();
 
-routes.get("/", (req, res) => {
+routes.get("/", (_, res) => {
   res.json({ message: "running" });
 });
 
-routes.post("/register", (req, res) => {
-  res.json({ message: "running" });
-});
+routes.post("/register", usercontroller.createUser);
 
-routes.post("/login", (req, res) => {
-  res.json({ message: "running" });
-});
+routes.post("/login", usercontroller.authUser);
 
 export default routes;
