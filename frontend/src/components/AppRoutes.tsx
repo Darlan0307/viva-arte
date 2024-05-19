@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
+import Header from "./header";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
-      {/* HEADER */}
+      <Header />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/register" element={<h1>SignUp</h1>} />
