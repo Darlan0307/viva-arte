@@ -1,10 +1,11 @@
-function App() {
+import AppRoutes from "./components/AppRoutes";
 
+function App() {
   return (
     <>
-      <h1>teste</h1>
+      <AppRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
