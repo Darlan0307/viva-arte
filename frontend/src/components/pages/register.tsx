@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import ImgRegister from "../../assets/img-register.png";
 import { Button } from "../ui/button";
@@ -32,13 +33,12 @@ const Register = () => {
     if (!isDataValid) return;
 
     try {
-      const response = await api.post("/register", { DataUser });
-
-      console.log(response);
-      setIsLoading(false);
+      await api.post("/register", DataUser);
       toast.success("Usuário cadastrado com sucesso!");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import ImgLogin from "../../assets/img-login.png";
 import { Button } from "../ui/button";
@@ -31,13 +32,17 @@ const Login = () => {
     }
 
     try {
-      const response = await api.post("/login", { DataUser });
+      const response = await api.post("/login", DataUser);
 
-      console.log(response);
+      if (response.status == 200) {
+        toast.success(response.data.message);
+      } else if (response.status == 401) {
+        toast.warning(response.data.message);
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    } finally {
       setIsLoading(false);
-      toast.success("Usuário cadastrado com sucesso!");
-    } catch (error) {
-      console.log(error);
     }
   };
 
