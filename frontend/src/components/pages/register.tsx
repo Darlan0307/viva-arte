@@ -2,8 +2,34 @@ import { Link } from "react-router-dom";
 import ImgRegister from "../../assets/img-register.png";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { FormEvent, useState } from "react";
+import { ValidateDataForm } from "@/utils/validate-data-form";
+import { UserType } from "@/@types/user-type";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const DataUser: UserType = {
+      name,
+      email,
+      password,
+      confirm_password: confirmPassword,
+    };
+
+    const isDataValid = ValidateDataForm({ DataUser });
+
+    if (!isDataValid) return;
+
+    toast.success("Usuário cadastrado com sucesso!");
+  };
+
   return (
     <div className="md:h-[70vh] grid place-content-center">
       <h1 className="text-3xl text-center my-6">Faça o seu cadastro agora!</h1>
@@ -14,11 +40,34 @@ const Register = () => {
           className="w-full md:max-w-[50%]"
         />
         <div className="space-y-5">
-          <form className="flex flex-col gap-4">
-            <Input placeholder="Nome" />
-            <Input placeholder="Email" type="email" />
-            <Input placeholder="Senha" type="password" />
-            <Input placeholder="Confirme a senha" type="password" />
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <Input
+              placeholder="Nome"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              placeholder="Email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              placeholder="Senha"
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Input
+              placeholder="Confirme a senha"
+              type="password"
+              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
             <Button type="submit" className="text-lg">
               Cadastrar
             </Button>

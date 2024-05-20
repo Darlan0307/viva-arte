@@ -2,8 +2,30 @@ import { Link } from "react-router-dom";
 import ImgLogin from "../../assets/img-login.png";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { FormEvent, useState } from "react";
+import { ValidateDataForm } from "@/utils/validate-data-form";
+import { toast } from "react-toastify";
+import { UserType } from "@/@types/user-type";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const DataUser: UserType = {
+      email,
+      password,
+    };
+
+    const isDataValid = ValidateDataForm({ DataUser });
+
+    if (!isDataValid) return;
+
+    toast.success("Usuário cadastrado com sucesso!");
+  };
+
   return (
     <div className="md:h-[70vh] grid place-content-center">
       <h1 className="text-3xl text-center my-6">Entre com a sua conta</h1>
@@ -14,9 +36,21 @@ const Login = () => {
           className="w-full md:max-w-[50%]"
         />
         <div className="space-y-5">
-          <form className="flex flex-col gap-4">
-            <Input placeholder="Email" type="email" />
-            <Input placeholder="Senha" type="password" />
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <Input
+              placeholder="Email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              placeholder="Senha"
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <Button type="submit" className="text-lg">
               Cadastrar
             </Button>
