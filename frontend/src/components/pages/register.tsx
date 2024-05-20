@@ -6,15 +6,19 @@ import { FormEvent, useState } from "react";
 import { ValidateDataForm } from "@/utils/validate-data-form";
 import { UserType } from "@/@types/user-type";
 import { toast } from "react-toastify";
+import Loader from "../loader";
+import { api } from "@/services/api";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const DataUser: UserType = {
       name,
@@ -27,8 +31,20 @@ const Register = () => {
 
     if (!isDataValid) return;
 
-    toast.success("Usuário cadastrado com sucesso!");
+    try {
+      const response = await api.post("/register", { DataUser });
+
+      console.log(response);
+      setIsLoading(false);
+      toast.success("Usuário cadastrado com sucesso!");
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="md:h-[70vh] grid place-content-center">
