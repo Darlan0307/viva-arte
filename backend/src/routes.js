@@ -7,11 +7,7 @@ const usercontroller = new UserController();
 const routes = Router();
 
 (async () => {
-  try {
-    await prisma.$connect();
-  } catch (error) {
-    process.exit(1);
-  }
+  await prisma.$connect();
 })();
 
 routes.get("/", (_, res) => {
