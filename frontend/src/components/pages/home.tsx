@@ -4,8 +4,7 @@ import { useEffect } from "react";
 
 const Home = () => {
   const connectBD = async () => {
-    const response = await api.get("/");
-    console.log(response);
+    await api.get("/");
   };
 
   useEffect(() => {
@@ -13,7 +12,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
+    <main className="mb-20">
       <Carrossel />
     </main>
   );

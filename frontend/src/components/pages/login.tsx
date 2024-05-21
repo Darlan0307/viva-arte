@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImgLogin from "../../assets/img-login.png";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -9,11 +9,16 @@ import { toast } from "react-toastify";
 import { UserType } from "@/@types/user-type";
 import { api } from "@/services/api";
 import Loader from "../loader";
+import { useAuth } from "@/context/auth-provider";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const { handleEmailUser } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -36,6 +41,11 @@ const Login = () => {
 
       if (response.status == 200) {
         toast.success(response.data.message);
+
+        handleEmailUser(DataUser.email);
+        setEmail("");
+        setPassword("");
+        navigate("/course");
       } else if (response.status == 401) {
         toast.warning(response.data.message);
       }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImgRegister from "../../assets/img-register.png";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -9,6 +9,7 @@ import { UserType } from "@/@types/user-type";
 import { toast } from "react-toastify";
 import Loader from "../loader";
 import { api } from "@/services/api";
+import { useAuth } from "@/context/auth-provider";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -16,6 +17,10 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const { handleEmailUser } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -35,6 +40,12 @@ const Register = () => {
     try {
       await api.post("/register", DataUser);
       toast.success("Usuário cadastrado com sucesso!");
+      handleEmailUser(DataUser.email);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/course");
     } catch (error: any) {
       toast.error(error.response.data.message);
     } finally {

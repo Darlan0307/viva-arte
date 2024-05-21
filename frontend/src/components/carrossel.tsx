@@ -4,7 +4,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import CardCarrossel from "./card-carrossel";
-// import Autoplay from "embla-carousel-autoplay";
+import Autoplay from "embla-carousel-autoplay";
 
 const Carrossel = () => {
   return (
@@ -13,11 +13,11 @@ const Carrossel = () => {
         align: "start",
         loop: true,
       }}
-      // plugins={[
-      //   Autoplay({
-      //     delay: 2000,
-      //   }),
-      // ]}
+      plugins={[
+        Autoplay({
+          delay: 2000,
+        }),
+      ]}
     >
       <CarouselContent>
         <CarouselItem>
