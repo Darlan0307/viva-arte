@@ -5,6 +5,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import PrivateRouter from "./private-route";
 import Course from "./pages/course";
+import Footer from "./footer";
 
 const AppRoutes = () => {
   return (
@@ -23,7 +24,7 @@ const AppRoutes = () => {
 
         <Route path="/course" element={<Course />} />
       </Routes>
-      {/* FOOTER */}
+      <Footer />
     </BrowserRouter>
   );
 };

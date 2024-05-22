@@ -28,10 +28,15 @@ const Home = () => {
             value={textFilter}
             onChange={(e) => setTextFilter(e.target.value)}
           />
-          <button className="absolute top-[50%] -translate-y-[50%] right-2 ">
-            <X />
-          </button>
+          {textFilter && (
+            <button className="absolute top-[50%] -translate-y-[50%] right-2 ">
+              <X />
+            </button>
+          )}
         </div>
+      </section>
+      <section className="min-h-[40vh]">
+        <h2>quados aqui</h2>
       </section>
     </main>
   );
