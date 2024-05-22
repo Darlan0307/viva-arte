@@ -3,7 +3,7 @@ import { FaSquareWhatsapp, FaSquareInstagram } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="px-5 py-12 border-t-2 border-black border-solid">
+    <footer className="mt-16 px-5 py-12 border-t-2 border-black border-solid">
       <div className="flex flex-wrap gap-10 items-start justify-center lg:justify-around">
         <div className="w-[200px] text-center space-y-3 text-[#333]">
           <h2 className="text-2xl font-bold">Institucional</h2>
