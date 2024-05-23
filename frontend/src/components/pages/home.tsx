@@ -3,10 +3,11 @@ import Carrossel from "../carrossel";
 import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { X } from "lucide-react";
+import { allQuadros } from "@/db/quadros";
 
 const Home = () => {
   const [textFilter, setTextFilter] = useState("");
-
+  const [dataQuadro, setDataQuadro] = useState(allQuadros);
   const connectBD = async () => {
     await api.get("/");
   };
@@ -14,6 +15,18 @@ const Home = () => {
   useEffect(() => {
     connectBD();
   }, []);
+
+  useEffect(() => {
+    if (textFilter) {
+      const quadrosFiltred = dataQuadro.filter((quadro) =>
+        quadro.name.includes(textFilter.toUpperCase())
+      );
+
+      setDataQuadro(quadrosFiltred);
+    } else {
+      setDataQuadro(allQuadros);
+    }
+  }, [textFilter]);
 
   return (
     <main className="mb-20">
@@ -29,14 +42,43 @@ const Home = () => {
             onChange={(e) => setTextFilter(e.target.value)}
           />
           {textFilter && (
-            <button className="absolute top-[50%] -translate-y-[50%] right-2 ">
+            <button
+              className="absolute top-[50%] -translate-y-[50%] right-2 "
+              onClick={() => setTextFilter("")}
+            >
               <X />
             </button>
           )}
         </div>
       </section>
-      <section className="min-h-[40vh]">
-        <h2>quados aqui</h2>
+      <section className="min-h-[30vh] mt-10 px-10 flex flex-wrap items-start justify-center gap-10">
+        {dataQuadro.length == 0 && (
+          <p className="text-lg text-center">
+            Sem resultados para:{" "}
+            <span className="text-primary font-bold">{textFilter}</span>
+          </p>
+        )}
+        {dataQuadro.length > 0 &&
+          dataQuadro.map((quadro) => (
+            <div key={quadro.id}>
+              <div className="relative rounded-lg -skew-x-6 -translate-y-2 -translate-y-6 hover:-translate-y-1 hover:-translate-x-0 hover:skew-x-0 duration-500 w-64 h-44 p-2 bg-neutral-50 card-compact hover:bg-base-200 transition-all duration-200 [box-shadow:6px_6px] hover:[box-shadow:4px_4px]">
+                <figure className="w-full h-full">
+                  <div className="bg-neutral-800 text-neutral-50 min-h-full rounded-lg border border-opacity-5">
+                    <img
+                      src={quadro.urlImage}
+                      alt="teste"
+                      className="w-full h-[160px] rounded-lg"
+                    />
+                  </div>
+                </figure>
+                <div className="absolute text-neutral-50 bottom-4 left-0 px-4">
+                  <h3 className=" w-[200px] text-center text-nowrap text-ellipsis overflow-hidden font-bold bg-primary p-1 rounded-sm">
+                    {quadro.name}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          ))}
       </section>
     </main>
   );
