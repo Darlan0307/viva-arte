@@ -42,7 +42,7 @@ const Home = () => {
     <main className="mb-20">
       <Carrossel />
       <section className="p-5">
-        <h2 className="my-6 text-3xl text-center">
+        <h2 className="my-6 text-3xl text-center font-bold">
           Conheça todas as nossas <span>artes</span>
         </h2>
         <div className="w-full max-w-[500px] flex items-center mx-auto relative">

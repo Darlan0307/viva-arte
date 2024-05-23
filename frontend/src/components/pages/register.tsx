@@ -59,7 +59,7 @@ const Register = () => {
 
   return (
     <div className="md:h-[70vh] grid place-content-center">
-      <h1 className="text-3xl text-center my-6">Faça o seu cadastro agora!</h1>
+      <h1 className="text-3xl text-center my-6 font-bold">Faça o seu cadastro agora!</h1>
       <div className="flex flex-col gap-5 items-center justify-center w-full max-w-[1200px] mx-auto p-5 md:flex-row  ">
         <img
           src={ImgRegister}
