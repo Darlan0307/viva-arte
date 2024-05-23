@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/carousel";
 import CardCarrossel from "./card-carrossel";
 import Autoplay from "embla-carousel-autoplay";
+import { ImgsCarrossel } from "@/db/imgs-carrossel";
 
 const Carrossel = () => {
   return (
@@ -20,15 +21,11 @@ const Carrossel = () => {
       ]}
     >
       <CarouselContent>
-        <CarouselItem>
-          <CardCarrossel />
-        </CarouselItem>
-        <CarouselItem>
-          <CardCarrossel />
-        </CarouselItem>
-        <CarouselItem>
-          <CardCarrossel />
-        </CarouselItem>
+        {ImgsCarrossel.map((image) => (
+          <CarouselItem key={image.id}>
+            <CardCarrossel urlImage={image.urlImage} />
+          </CarouselItem>
+        ))}
       </CarouselContent>
     </Carousel>
   );
