@@ -4,29 +4,39 @@ import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { X } from "lucide-react";
 import { allQuadros } from "@/db/quadros";
+import debounce from "lodash.debounce";
+import { QuadroType } from "@/@types/quadro-type";
 
 const Home = () => {
   const [textFilter, setTextFilter] = useState("");
-  const [dataQuadro, setDataQuadro] = useState(allQuadros);
+  const [dataQuadro, setDataQuadro] = useState<QuadroType[]>([]);
+  const [filteredDataQuadro, setFilteredDataQuadro] = useState<QuadroType[]>(
+    []
+  );
   const connectBD = async () => {
     await api.get("/");
+    setDataQuadro(allQuadros);
+    setFilteredDataQuadro(allQuadros);
   };
 
   useEffect(() => {
     connectBD();
   }, []);
 
-  useEffect(() => {
-    if (textFilter) {
+  const handleFilter = debounce((text: string) => {
+    if (text) {
       const quadrosFiltred = dataQuadro.filter((quadro) =>
-        quadro.name.includes(textFilter.toUpperCase())
+        quadro.name.toLowerCase().includes(text.toLowerCase())
       );
-
-      setDataQuadro(quadrosFiltred);
+      setFilteredDataQuadro(quadrosFiltred);
     } else {
-      setDataQuadro(allQuadros);
+      setFilteredDataQuadro(dataQuadro);
     }
-  }, [textFilter]);
+  }, 500);
+
+  useEffect(() => {
+    handleFilter(textFilter);
+  }, [textFilter, handleFilter]);
 
   return (
     <main className="mb-20">
@@ -52,14 +62,14 @@ const Home = () => {
         </div>
       </section>
       <section className="min-h-[30vh] mt-10 px-10 flex flex-wrap items-start justify-center gap-10">
-        {dataQuadro.length == 0 && (
+        {filteredDataQuadro.length == 0 && (
           <p className="text-lg text-center">
             Sem resultados para:{" "}
             <span className="text-primary font-bold">{textFilter}</span>
           </p>
         )}
-        {dataQuadro.length > 0 &&
-          dataQuadro.map((quadro) => (
+        {filteredDataQuadro.length > 0 &&
+          filteredDataQuadro.map((quadro) => (
             <div key={quadro.id}>
               <div className="relative rounded-lg -skew-x-6 -translate-y-2 -translate-y-6 hover:-translate-y-1 hover:-translate-x-0 hover:skew-x-0 duration-500 w-64 h-44 p-2 bg-neutral-50 card-compact hover:bg-base-200 transition-all duration-200 [box-shadow:6px_6px] hover:[box-shadow:4px_4px]">
                 <figure className="w-full h-full">
