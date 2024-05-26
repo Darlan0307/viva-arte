@@ -81,8 +81,8 @@ const Home = () => {
                     />
                   </div>
                 </figure>
-                <div className="absolute text-neutral-50 bottom-4 left-0 px-4">
-                  <h3 className=" w-[200px] text-center text-nowrap text-ellipsis overflow-hidden font-bold bg-primary p-1 rounded-sm">
+                <div className="absolute text-neutral-50 bottom-4 left-[50%] -translate-x-[50%] px-4">
+                  <h3 className="w-[200px] text-center text-nowrap text-ellipsis overflow-hidden text-sm font-bold bg-primary opacity-100 px-2 py-1 rounded-sm">
                     {quadro.name}
                   </h3>
                 </div>

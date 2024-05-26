@@ -16,25 +16,6 @@ const Course = () => {
             allowFullScreen
           ></iframe>
 
-          {/* <div className="w-full max-w-[300px] min-h-[360px] shadow-2xl border border-black border-solid flex flex-col p-5 gap-5 rounded-md">
-            <h3 className="text-2xl text-center">
-              Adquira o nosso curso de forma{" "}
-              <span className="text-primary font-bold">gratuita</span>
-            </h3>
-            <p className="text-lg">Algumas vantagens que você terá:</p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>Adquirir Habilidades Técnicas.</li>
-              <li>Expressão Criativa</li>
-              <li>Ambiente Inspirador</li>
-              <li>Flexibilidade Nas Aulas</li>
-              <li>Comunidade Artistica</li>
-              <li>Certificado</li>
-            </ul>
-            <Button size="lg" className="text-xl">
-              Adquira já
-            </Button>
-          </div> */}
-
           <div className="w-full max-w-[300px] min-h-[360px] duration-500 group overflow-hidden relative rounded bg-neutral-800 text-neutral-50 p-4 flex flex-col justify-evenly">
             <div className="absolute blur duration-500 group-hover:blur-none w-72 h-72 rounded-full group-hover:translate-x-12 group-hover:translate-y-12 bg-sky-900 right-1 -bottom-24"></div>
             <div className="absolute blur duration-500 group-hover:blur-none w-12 h-12 rounded-full group-hover:translate-x-12 group-hover:translate-y-2 bg-indigo-700 right-12 bottom-12"></div>
