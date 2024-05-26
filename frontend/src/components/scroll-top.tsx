@@ -21,7 +21,7 @@ const ScrollTop = () => {
           scrollTo({ left: 0, top: 0, behavior: "smooth" });
         }}
         size="icon"
-        className="fixed animate-bounce text-[40px] sm:text-[50px] bottom-2 right-3 z-30 lg:bottom-10 lg:right-10 p-2 shadow-lg"
+        className="fixed animate-bounce text-[40px] sm:text-[50px] bottom-5 right-5 z-30 lg:bottom-10 lg:right-10 p-2 shadow-lg"
       >
         <FaArrowUp />
       </Button>
