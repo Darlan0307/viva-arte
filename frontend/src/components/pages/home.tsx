@@ -15,11 +15,11 @@ const Home = () => {
   );
   const connectBD = async () => {
     await api.get("/");
-    setDataQuadro(allQuadros);
-    setFilteredDataQuadro(allQuadros);
   };
 
   useEffect(() => {
+    setDataQuadro(allQuadros);
+    setFilteredDataQuadro(allQuadros);
     connectBD();
   }, []);
 
