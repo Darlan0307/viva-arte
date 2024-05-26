@@ -18,7 +18,7 @@ import img17 from "../assets/quadros/POR DO SOL NO CAIS.jpg";
 import img18 from "../assets/quadros/cafe da tardezinha.jpg";
 import img19 from "../assets/quadros/cavalo a oleo.jpg";
 import img20 from "../assets/quadros/por do sol na praia.jpg";
-import img21 from "../assets/quadros/pokebola.png";
+import img21 from "../assets/quadros/pokebola.jpg";
 
 export const allQuadros = [
   {
